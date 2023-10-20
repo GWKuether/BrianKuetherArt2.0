@@ -10,8 +10,12 @@ import PortraitsPage from './Pages/PortraitsPage/PortraitsPage';
 import PrintsPage from './Pages/PrintsPage/PrintsPage';
 import PiecePage from './Pages/PiecePage/PiecePage';
 import { useNavigate } from "react-router-dom";
+import Paypal from "./Components/Paypal"
+import { useState } from "react";
 
 function App() {
+
+  const [Checkout, setCheckOut] = useState(false);
 
   const navigate = useNavigate();
 
@@ -36,6 +40,11 @@ function App() {
       <Route path="/prints" element={<PrintsPage />} />
       <Route path="/piece" element={<PiecePage />} />
     </Routes>
+    {Checkout ? (
+        <Paypal/>
+
+      ) : (
+      <button onClick={() => setCheckOut(true)}>Checkout</button> )}
     </div>
   );
 }
