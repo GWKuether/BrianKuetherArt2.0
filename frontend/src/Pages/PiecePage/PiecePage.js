@@ -1,8 +1,7 @@
 import { useLocation } from "react-router-dom";
 import "./PiecePage.css";
 import ReactImageMagnify from "react-image-magnify";
-
-
+import PaypalCheckoutButton from "../../Components/PaypalCheckoutButton";
 
 const PiecePage = (props) => {
   const state = useLocation();
@@ -15,13 +14,21 @@ const PiecePage = (props) => {
   const intHeight = Number(height * 40);
   const intWidth = Number(width * 40);
 
-  
+  const product = {
+    description: piece.imageTitle,
+    price: piece.imagePrice,
+  };
 
   function checkSold() {
     if (piece.imageSold === true) {
       return <h3>SOLD</h3>;
     } else {
-      return <h3>{piece.imagePrice}</h3>;
+      return (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <h3>${piece.imagePrice}</h3>
+          <PaypalCheckoutButton product={product} />
+        </div>
+      );
     }
   }
 
